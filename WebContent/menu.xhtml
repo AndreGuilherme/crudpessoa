@@ -1,0 +1,20 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ul class="nav nav-list" style="padding-top: 15px;">
+		<li><em><h:outputText value="#{msg['label.pessoas']}" /></em></li>
+
+		<li
+			class="#{empty param.active || param.active == 'lista' ? 'active' : ''}">
+			<h:link outcome="listaPessoas" value="Lista">
+				<f:param name="active" value="lista" />
+			</h:link>
+		</li>
+		<li class="#{param.active == 'incluir' ? 'active' : ''}"><h:link
+				outcome="createPessoa" value="#{msg['menu.incluir']}">
+				<f:param name="active" value="incluir" />
+			</h:link></li>
+	</ul>
+</ui:fragment>

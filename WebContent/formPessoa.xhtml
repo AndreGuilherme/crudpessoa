@@ -1,0 +1,53 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form styleClass="form-horizontal">
+		<fieldset>
+			<legend>
+					<h:outputText value="#{msg['label.pessoas']}" />
+					<small> <h:outputText value="#{subtitle}" /></small>
+				
+			</legend>
+			<div class="control-group">
+				<label class="control-label"><h:outputText
+						value="#{msg['label.pessoa.nome']}" /></label>
+				<div class="controls">
+					<h:inputText value="#{pessoaBean.pessoa.nome}"
+						label="#{msg['label.pessoa.nome']}" required="true"
+						styleClass="input-large">
+						<f:validateLength minimum="5" maximum="250" />
+					</h:inputText>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label"><h:outputText
+						value="#{msg['label.pessoa.cpf']}" /></label>
+				<div class="controls">
+					<h:inputText value="#{pessoaBean.pessoa.cpf}"
+						label="#{msg['label.pessoa.cpf']}" required="true"
+						styleClass="input-large">
+						<f:validateLength minimum="11" maximum="11" />
+					</h:inputText>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="control-group">
+			<div class="controls">
+				<h:commandButton value="#{msg['button.salvar']}"
+					action="#{pessoaBean.save}" styleClass="btn btn-success" />
+				<h:button value="#{msg['button.cancelar']}" outcome="listaPessoas"
+					styleClass="btn" />
+			</div>
+		</div>
+	</h:form>
+
+	<h:panelGroup layout="block" class="alert alert-error"
+		rendered="#{facesContext.validationFailed or not empty facesContext.messageList }">
+		<h:messages showDetail="true" showSummary="false" />
+	</h:panelGroup>
+
+</ui:fragment>

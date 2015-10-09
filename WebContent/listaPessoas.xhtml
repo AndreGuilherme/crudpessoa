@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/layout/template.xhtml">
+	<ui:define name="pageTitle">
+		<h:outputText value="#{msg['page.title.lista.pessoa']}" />
+	</ui:define>
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{pessoaBean.novo}" />
+	</f:metadata>
+
+	<ui:define name="content">
+		<div style="border-bottom: 1px solid #E5E5E5;">
+			<h3>
+				<h:outputText value="#{msg['label.pessoas']}" />
+				<small> <h:outputText value="#{msg['label.listagem']}" /></small>
+			</h3>
+		</div>
+		<h:form>
+			<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa"
+				styleClass="table table-hover">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{label.pessoa.codigo}" />
+					</f:facet>
+					<h:outputText value="#{pessoa.codigo}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.pessoa.nome']}" />
+					</f:facet>
+					<h:link outcome="createPessoa" value="#{pessoa.nome}"
+						title="#{msg['label.incluir']} #{pessoa.nome}">
+						<f:param name="id" value="#{pessoa.codigo}" />
+					</h:link>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.pessoa.cpf']}" />
+					</f:facet>
+					<h:outputText value="#{pessoa.cpf}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['button.excluir']}" />
+					</f:facet>
+						<h:commandLink value="#{msg['button.excluir']}"
+							action="#{pessoaBean.delete}" styleClass="btn btn-danger">
+							<f:setPropertyActionListener target="#{pessoaBean.codigo}"
+								value="#{pessoa.codigo}" />
+						</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+		<h:messages />
+	</ui:define>
+</ui:composition>
+</html>
